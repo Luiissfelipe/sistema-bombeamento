@@ -1,0 +1,52 @@
+section {
+    padding: 24px 16px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--blue);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 20px 20px 0 0;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.section-map {
+    height: 300px;
+    background-color: lightgray;
+}
+
+.section-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: lightblue;
+    padding: 16px 24px;
+    border-radius: 0 0 20px 20px;
+}
+
+.section-footer-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.section-footer-buttons-btn {
+    width: 100%;
+}

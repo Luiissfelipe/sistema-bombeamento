@@ -1,0 +1,58 @@
+<section>
+    <div class="section-header">   
+        <div class="section-header-icon">
+            <mat-icon>settings</mat-icon>
+        </div> 
+        <div class="section-header-info">
+            <h2>Configurações do Sistema</h2>
+            <p>Configure os parâmetros do sistema</p>
+        </div>
+    </div>
+    <div class="section-info">
+        <div class="section-info-title">
+            <div class="section-info-icon">
+                <mat-icon class="icon-location"> location_on</mat-icon>
+            </div>
+            <h3>Dados Geográficos Obtidos</h3>
+        </div>
+        
+        <div class="section-info-text">
+            <p>Altitude Origem: <b>1000m</b></p>
+            <p>Altitude Destino: <b>1000m</b></p>
+            <p>Distância: <b>10000m</b></p>
+        </div>
+    </div>
+    <div class="section-main">
+        <form action="">
+            <div class="section-main-form-field">
+                <label for="type">Tipo de Bomba *</label>
+                <select name="type" id="type" required>
+                    <option disabled selected>Selecione o tipo...</option>
+                    <option value="submerged">Bomba Submersa</option>
+                    <option value="surface">Bomba de Superfície</option>
+                </select>
+            </div>
+            <div class="section-main-form-field">
+                <label for="height">Altura da Caixa d`Água (m) *</label>
+                <input type="number" name="height" id="height" required>
+            </div>
+            <div class="section-main-form-field">
+                <label for="flow">Vazão da Bomba (m³/h) *</label>
+                <input type="number" name="flow" id="flow" required>
+            </div>
+            <div class="section-main-form-field">
+                <label for="flow">Comprimento da Tubulação (m)</label>
+                <input type="number" name="length" id="length" required>
+            </div>
+        </form>
+        <div class="section-main-form-buttons">
+            <button class="section-main-btn-clean">Voltar ao Mapa</button>
+            <button class="section-main-btn-confirm">
+                <mat-icon class="icon-near-me"> near_me</mat-icon>
+                Calcular Dimensionamento
+            </button>
+        </div>
+    </div>
+    
+    
+</section>

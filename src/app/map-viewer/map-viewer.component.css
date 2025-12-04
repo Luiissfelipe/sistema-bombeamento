@@ -21,11 +21,7 @@ section {
 }
 
 .section-header-info h2, h3 {
-    font-size: 16px;
-}
-
-.section-header-info p {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .section-info {
@@ -46,7 +42,6 @@ section {
 
 .icon-location {
     color: var(--primary);
-    font-size: 24px;
 }
 
 .section-info-text {
@@ -94,7 +89,8 @@ span {
 }
 
 button {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     padding: 12px 24px;
     border: none;
     border-radius: 15px;

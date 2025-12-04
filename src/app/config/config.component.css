@@ -21,11 +21,11 @@ section {
 }
 
 .section-header-info h2, h3 {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .section-header-info p {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .section-info {
@@ -87,19 +87,21 @@ section {
 
 .section-main-form-field select {
     color: var(--primary);
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     padding: 12px 24px;
     border: solid 1px var(--primary);
     border-radius: 15px;
     cursor: pointer;
 }
 
-.section-main-form-field option:hover {
-    background-color: var(--primary);
+.section-main-form-field option {
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .section-main-form-field input {
-    font-size: 14px;
+    font-size: 16px;
     padding: 12px 24px;
     border: solid 1px var(--primary);
     border-radius: 15px;
@@ -112,7 +114,8 @@ section {
 }
 
 button {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     padding: 12px 24px;
     border: none;
     border-radius: 15px;

@@ -8,5 +8,5 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './map-viewer.component.css'
 })
 export class MapViewerComponent {
-
+  
 }

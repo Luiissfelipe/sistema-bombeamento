@@ -3,10 +3,14 @@
     src: url('../fonts/Kelson\ Sans\ Light_0.otf');
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root {
     --primary: #1D2362;
+    --secondary: #EEEFF7;
 
     --font: "Kelson Sans", sans-serif;
+    /* --font: "Open Sans", sans-serif; */
 }
 
 *{
@@ -16,4 +20,4 @@
     padding: 0;
 }
 
-html, body { height: 100%; color: var(--primary); font-weight: 600; }
+html, body { height: 100%; background-color: var(--secondary) ; color: var(--primary); font-weight: 600; }

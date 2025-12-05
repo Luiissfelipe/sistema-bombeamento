@@ -23,7 +23,7 @@
     padding: 0;
 }
 
-html, body { height: 100%; background-color: var(--secondary) ; color: var(--primary); font-weight: 600; }
+html, body { height: 100vh; background-color: var(--secondary) ; color: var(--primary); font-weight: 600; }
 
 h2, h3, h4, b, label {
     font-family: var(--font-regular);

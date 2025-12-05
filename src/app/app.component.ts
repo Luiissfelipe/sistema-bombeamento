@@ -6,7 +6,7 @@ import { ResultComponent } from "./result/result.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MapViewerComponent, ConfigComponent, ResultComponent],
+  imports: [RouterOutlet, MapViewerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

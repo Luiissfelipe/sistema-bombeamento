@@ -21,12 +21,12 @@
             <p><span class="place-destination"></span>Reservatório</p>
         </div>
     </div>
-    <div class="section-main">
+    <div class="section-main" id="map">
         
     </div>
     <div class="section-footer">
-        <button class="section-footer-btn-clean">Limpar Pontos</button>
-        <button class="section-footer-btn-confirm">
+        <button (click)="clearMap()" class="section-footer-btn-clean">Limpar Pontos</button>
+        <button (click)="confirm()" class="section-footer-btn-confirm">
             <mat-icon class="icon-near-me"> near_me</mat-icon>
             Confirmar Pontos
         </button>

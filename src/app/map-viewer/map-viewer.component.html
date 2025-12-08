@@ -1,35 +1,47 @@
 <section>
-    <div class="section-header">   
-        <div class="section-header-icon">
-            <mat-icon>wb_sunny</mat-icon>
-            
-        </div> 
-        <div class="section-header-info">
-            <h2>Sistema de dimensionamento de bombeamento solar</h2>
-        </div>
+  <div class="section-header">
+    <div class="section-header-icon">
+      <mat-icon>wb_sunny</mat-icon>
     </div>
-    <div class="section-info">
-        <div class="section-info-title">
-            <div class="section-info-icon">
-                <mat-icon class="icon-location">location_on</mat-icon>
-            </div>
-            <h3>Clique no mapa para selecionar o ponto de origem (fonte de água)</h3>
-        </div>
-        
-        <div class="section-info-text">
-            <p><span class="place-origin"></span>Ponto de Captação</p>
-            <p><span class="place-destination"></span>Reservatório</p>
-        </div>
+    <div class="section-header-info">
+      <h2>Sistema de dimensionamento de bombeamento solar</h2>
     </div>
-    <div class="section-main" id="map">
-        
+  </div>
+  <div class="section-info">
+    <div class="section-info-title">
+      <div class="section-info-icon">
+        <mat-icon class="icon-location">location_on</mat-icon>
+      </div>
+      <h3>Clique no mapa para selecionar o ponto de origem (fonte de água)</h3>
     </div>
-    <div class="section-footer">
-        <button (click)="clearMap()" class="section-footer-btn-clean">Limpar Pontos</button>
-        <button (click)="confirm()" class="section-footer-btn-confirm">
-            <mat-icon class="icon-near-me"> near_me</mat-icon>
-            Confirmar Pontos
-        </button>
+
+    <div class="section-info-text">
+      <p>
+        <span class="place-origin"></span>Ponto de Captação:
+        {{
+          point1
+            ? point1.lat.toFixed(4) + ", " + point1.lng.toFixed(4)
+            : "Não selecionado"
+        }}
+      </p>
+      <p>
+        <span class="place-destination"></span>Reservatório:
+        {{
+          point2
+            ? point2.lat.toFixed(4) + ", " + point2.lng.toFixed(4)
+            : "Não selecionado"
+        }}
+      </p>
     </div>
-    
+  </div>
+  <div class="section-main" id="map"></div>
+  <div class="section-footer">
+    <button (click)="clearMap()" class="section-footer-btn-clean">
+      Limpar Pontos
+    </button>
+    <button (click)="confirm()" class="section-footer-btn-confirm">
+      <mat-icon class="icon-near-me"> near_me</mat-icon>
+      Confirmar Pontos
+    </button>
+  </div>
 </section>

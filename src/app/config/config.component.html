@@ -1,58 +1,69 @@
 <section>
-    <div class="section-header">   
-        <div class="section-header-icon">
-            <mat-icon>settings</mat-icon>
-        </div> 
-        <div class="section-header-info">
-            <h2>Configurações do Sistema</h2>
-            <p>Configure os parâmetros do sistema</p>
-        </div>
+  <div class="section-info">
+    <div class="section-info-text" *ngIf="geoData">
+      <p>
+        Altitude Origem: <b>{{ geoData.alt1 | number : "1.0-0" }}m</b>
+      </p>
+      <p>
+        Altitude Destino: <b>{{ geoData.alt2 | number : "1.0-0" }}m</b>
+      </p>
+      <p>
+        Distância: <b>{{ geoData.distance | number : "1.0-0" }}m</b>
+      </p>
     </div>
-    <div class="section-info">
-        <div class="section-info-title">
-            <div class="section-info-icon">
-                <mat-icon class="icon-location"> location_on</mat-icon>
-            </div>
-            <h3>Dados Geográficos Obtidos</h3>
-        </div>
-        
-        <div class="section-info-text">
-            <p>Altitude Origem: <b>1000m</b></p>
-            <p>Altitude Destino: <b>1000m</b></p>
-            <p>Distância: <b>10000m</b></p>
-        </div>
+  </div>
+  <div class="section-main">
+    <form #configForm="ngForm">
+      <div class="section-main-form-field">
+        <label for="type">Tipo de Bomba *</label>
+        <select name="type" id="type" required [(ngModel)]="formData.type">
+          <option value="" disabled selected>Selecione o tipo...</option>
+          <option value="submerged">Bomba Submersa</option>
+          <option value="surface">Bomba de Superfície</option>
+        </select>
+      </div>
+      <div class="section-main-form-field">
+        <label for="depth">Profundidade do Poço (m) *</label>
+        <input
+          type="number"
+          name="depth"
+          id="depth"
+          required
+          [(ngModel)]="formData.depth"
+          placeholder="Ex: 3"
+        />
+      </div>
+      <div class="section-main-form-field">
+        <label for="height">Altura da Caixa d`Água (m) *</label>
+        <input
+          type="number"
+          name="height"
+          id="height"
+          required
+          [(ngModel)]="formData.height"
+          placeholder="Ex: 5"
+        />
+      </div>
+      <div class="section-main-form-field">
+        <label for="flow">Vazão da Bomba (m³/h) *</label>
+        <input
+          type="number"
+          name="flow"
+          id="flow"
+          required
+          [(ngModel)]="formData.flow"
+          placeholder="Ex: 2"
+        />
+      </div>
+    </form>
+    <div class="section-main-form-buttons">
+      <button class="section-main-btn-clean" (click)="goBack()">
+        Voltar ao Mapa
+      </button>
+      <button class="section-main-btn-confirm" (click)="submitConfig()">
+        <mat-icon class="icon-near-me"> near_me</mat-icon>
+        Calcular Dimensionamento
+      </button>
     </div>
-    <div class="section-main">
-        <form action="">
-            <div class="section-main-form-field">
-                <label for="type">Tipo de Bomba *</label>
-                <select name="type" id="type" required>
-                    <option disabled selected>Selecione o tipo...</option>
-                    <option value="submerged">Bomba Submersa</option>
-                    <option value="surface">Bomba de Superfície</option>
-                </select>
-            </div>
-            <div class="section-main-form-field">
-                <label for="depth">Profundidade do Poço (m) *</label>
-                <input type="number" name="depth" id="depth" required placeholder="Ex: 3">
-            </div>
-            <div class="section-main-form-field">
-                <label for="height">Altura da Caixa d`Água (m) *</label>
-                <input type="number" name="height" id="height" required placeholder="Ex: 5">
-            </div>
-            <div class="section-main-form-field">
-                <label for="flow">Vazão da Bomba (m³/h) *</label>
-                <input type="number" name="flow" id="flow" required placeholder="Ex: 2000">
-            </div>
-        </form>
-        <div class="section-main-form-buttons">
-            <button class="section-main-btn-clean">Voltar ao Mapa</button>
-            <button class="section-main-btn-confirm">
-                <mat-icon class="icon-near-me"> near_me</mat-icon>
-                Calcular Dimensionamento
-            </button>
-        </div>
-    </div>
-    
-    
+  </div>
 </section>

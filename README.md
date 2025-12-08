@@ -32,7 +32,7 @@ Pré-requisitos: Node.js e Angular CLI instalados.
 1.  **Clone o repositório:**
     ```bash
     git clone [https://github.com/Luiissfelipe/sistema-bombeamento.git](https://github.com/Luiissfelipe/sistema-bombeamento.git)
-    cd seu-projeto
+    cd sistema-bombeamento
     ```
 
 2.  **Instale as dependências:**

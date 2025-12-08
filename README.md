@@ -1,59 +1,77 @@
-# SistemaBombeamento
+# Sistema de Dimensionamento de Bombeamento Solar ☀️💧
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+Este projeto é uma aplicação web desenvolvida em **Angular** para auxiliar no dimensionamento técnico de sistemas de bombeamento de água movidos a energia solar.
 
-## Development server
+O sistema permite que o usuário selecione pontos geográficos em um mapa, configura parâmetros do poço e da bomba, e recebe automaticamente os cálculos de altura manométrica, perdas de carga e estimativa de volume diário de água.
 
-To start a local development server, run:
+## 🚀 Funcionalidades
 
-```bash
-ng serve
-```
+-   **Mapa Interativo (Leaflet):** Seleção visual do ponto de captação (origem) e do reservatório (destino).
+-   **Altimetria Automática:** Integração com a **Open Elevation API** para obter a altitude exata dos pontos selecionados.
+-   **Cálculo de Distância:** Uso da fórmula de Haversine para precisão geográfica, com acréscimo automático de margem de segurança para tubulações.
+-   **Configuração Paramétrica:** Definição de tipo de bomba, profundidade do poço, altura da caixa d'água e vazão nominal.
+-   **Resultados Detalhados:**
+    -   Cálculo da Altura Manométrica Total (AMT).
+    -   Estimativa de Perda de Carga.
+    -   Cálculo de Vazão Real (considerando perdas de eficiência).
+    -   Volume diário estimado com base na insolação média (5.5h/sol pleno).
+-   **Proteção de Rotas (Guards):** O usuário só pode avançar para as telas de configuração e resultado se tiver preenchido os dados anteriores.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Tecnologias Utilizadas
 
-## Code scaffolding
+-   **Frontend:** [Angular 17+](https://angular.io/) (Standalone Components)
+-   **Mapas:** [Leaflet](https://leafletjs.com/) & [OpenStreetMap](https://www.openstreetmap.org/)
+-   **API de Elevação:** [Open Elevation API](https://open-elevation.com/)
+-   **Estilização:** CSS3 com Flexbox (Design Responsivo)
+-   **Ícones:** Angular Material Icons
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ⚙️ Instalação e Execução
 
-```bash
-ng generate component component-name
-```
+Pré-requisitos: Node.js e Angular CLI instalados.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/Luiissfelipe/sistema-bombeamento.git](https://github.com/Luiissfelipe/sistema-bombeamento.git)
+    cd seu-projeto
+    ```
 
-```bash
-ng generate --help
-```
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
 
-## Building
+3.  **Execute o servidor de desenvolvimento:**
+    ```bash
+    ng serve
+    ```
 
-To build the project run:
+4.  **Acesse a aplicação:**
+    Abra o navegador em `http://localhost:4200/`.
 
-```bash
-ng build
-```
+## 📐 Lógica de Cálculos
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+O sistema utiliza as seguintes premissas técnicas implementadas no `CalculationService`:
 
-## Running unit tests
+1.  **Comprimento da Tubulação:**
+    * Distância em linha reta (Haversine) + **10%** (margem para curvas, conexões e relevo).
+2.  **Desnível Geográfico:**
+    * `Altitude Destino - Altitude Origem`. (O sistema considera valores negativos, ou seja, desníveis favoráveis onde a gravidade auxilia o fluxo).
+3.  **Altura Manométrica Estática:**
+    * `Desnível + Profundidade do Poço + Altura da Caixa`.
+4.  **Perda de Carga:**
+    * Estimada em **10%** da Altura Estática.
+5.  **Vazão Real:**
+    * Considera-se **90%** da vazão nominal da bomba (perda de eficiência de 10%).
+6.  **Volume Diário:**
+    * `Vazão Real (L/h) * 5.5 horas`.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 📂 Estrutura do Projeto
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+src/app/
+├── config/           # Componente de formulário e validação
+├── map-viewer/       # Componente do mapa interativo (Leaflet)
+├── result/           # Componente de exibição do relatório final
+├── services/         # CalculationService (Lógica de negócios e estado)
+├── app.routes.ts     # Definição de rotas e Guards
+└── ...

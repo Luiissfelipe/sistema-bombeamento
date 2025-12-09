@@ -5,35 +5,36 @@ import { ConfigComponent } from './config/config.component';
 import { ResultComponent } from './result/result.component';
 import { CalculationService } from './services/calculation.service';
 
-// --- GUARDS (Proteção de Rota) ---
+// --- GUARDS (Segurança de Navegação) ---
 
-// Guard 1: Verifica se já temos Latitude/Longitude/Altitude
-// Se não tiver, impede de entrar na tela de Config e manda pro Início
+// Guard 1: Protege a rota '/config'
+// Só deixa passar se o usuário já tiver selecionado os pontos no mapa.
 const hasGeoDataGuard: CanActivateFn = () => {
   const service = inject(CalculationService);
   const router = inject(Router);
+  // Se tem dados, retorna TRUE (entra). Se não, redireciona para o início.
   return service.hasGeoData() ? true : router.createUrlTree(['/']);
 };
 
-// Guard 2: Verifica se já temos as Configurações da Bomba
-// Se não tiver, impede de entrar na tela de Resultado e manda pra Config
+// Guard 2: Protege a rota '/result'
+// Só deixa passar se o usuário já tiver preenchido o formulário.
 const hasConfigDataGuard: CanActivateFn = () => {
   const service = inject(CalculationService);
   const router = inject(Router);
+  // Se tem config, retorna TRUE. Se não, manda voltar para a config.
   return service.hasConfigData() ? true : router.createUrlTree(['/config']);
 };
 
-// Definição das Rotas
 export const routes: Routes = [
-  { path: '', component: MapViewerComponent }, // Rota raiz (Mapa)
+  { path: '', component: MapViewerComponent }, // Tela Inicial
   {
     path: 'config',
     component: ConfigComponent,
-    canActivate: [hasGeoDataGuard], // Protegida pelo Guard 1
+    canActivate: [hasGeoDataGuard], // Aplica proteção
   },
   {
     path: 'result',
     component: ResultComponent,
-    canActivate: [hasConfigDataGuard], // Protegida pelo Guard 2
+    canActivate: [hasConfigDataGuard], // Aplica proteção
   },
 ];

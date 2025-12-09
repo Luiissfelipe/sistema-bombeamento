@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-// Interface para tipar os dados geográficos (vêm do Mapa)
+// Interface que define a estrutura dos dados vindos do Mapa
 export interface GeoData {
   point1: { lat: number; lng: number };
   point2: { lat: number; lng: number };
@@ -9,7 +9,7 @@ export interface GeoData {
   distance: number;
 }
 
-// Interface para tipar os dados de configuração (vêm do Formulário)
+// Interface que define a estrutura dos dados vindos do Formulário
 export interface ConfigData {
   pumpType: string;
   wellDepth: number;
@@ -18,17 +18,19 @@ export interface ConfigData {
 }
 
 @Injectable({
-  providedIn: 'root', // Torna o serviço acessível em toda a aplicação (Singleton)
+  providedIn: 'root', // Singleton: O mesmo serviço é usado em toda a aplicação
 })
 export class CalculationService {
-  // Variáveis para armazenar o estado da aplicação enquanto o usuário navega
+  // --- ESTADO DA APLICAÇÃO ---
+  // Armazenam os dados enquanto o usuário navega entre as telas.
+  // Se forem null, significa que o usuário ainda não preencheu.
   private geoData: GeoData | null = null;
   private configData: ConfigData | null = null;
 
-  // Constante de horas de sol pleno para o cálculo (média)
+  // Constante: Média de horas de sol pleno (insolação) considerada para o cálculo
   readonly SUN_HOURS = 5.5;
 
-  // Salva os dados vindos do componente de Mapa
+  // Salva os dados do Mapa (Latitude, Longitude, Altitude, Distância)
   setGeoData(data: GeoData) {
     this.geoData = data;
   }
@@ -38,7 +40,7 @@ export class CalculationService {
     return this.geoData;
   }
 
-  // Salva os dados vindos do formulário de Configuração
+  // Salva os dados de Configuração (Tipo de Bomba, Vazão, Alturas)
   setConfigData(data: ConfigData) {
     this.configData = data;
   }
@@ -48,44 +50,50 @@ export class CalculationService {
     return this.configData;
   }
 
-  // O MÉTODO PRINCIPAL: Realiza todos os cálculos hidráulicos
+  // --- CÁLCULOS HIDRÁULICOS ---
   calculateResults() {
-    // Se faltar algum dado, não calcula e retorna null
+    // Segurança: Se faltar dado, não calcula
     if (!this.geoData || !this.configData) return null;
 
     const g = this.geoData;
     const c = this.configData;
 
-    // Adiciona 10% à distância geográfica para considerar curvas e conexões da tubulação
-    // Ex: Se a distância reta é 1000m, vira 1100m.
+    // 1. Comprimento da Tubulação:
+    // Pega a distância geográfica e adiciona 10% de margem de segurança
+    // para compensar curvas, conexões e desníveis do terreno.
     const pipingLength = g.distance * 1.1;
 
-    // 1. Cálculo do Desnível Geográfico (Altura Destino - Altura Origem)
-    // Math.max(0, ...) garante que não seja negativo se bombear para baixo
+    // 2. Desnível Geográfico:
+    // Diferença entre a altitude do destino e a origem.
+    // Math.max(0, ...) garante que, se for descida, o valor seja 0 (gravidade ajuda).
     const geoHeight = Math.max(0, g.alt2 - g.alt1);
 
-    // 2. Altura Manométrica Estática (Desnível + Profundidade Poço + Altura Caixa)
+    // 3. Altura Manométrica Estática (AMT Estática):
+    // Soma do desnível + profundidade do poço + altura da caixa d'água.
     const staticHead = geoHeight + c.wellDepth + c.tankHeight;
 
-    // 3. Perda de Carga (Estimativa simplificada de 10% da altura estática)
-    // Em projetos reais, isso usaria o pipingLength e tabelas de atrito, mas mantivemos a lógica simplificada
+    // 4. Perda de Carga:
+    // Estimativa simplificada de 10% sobre a altura estática.
+    // (Em projetos complexos, usaria tabelas de atrito baseadas no diâmetro do cano).
     const frictionLoss = staticHead * 0.1;
 
-    // 4. Altura Manométrica Total (AMT) = Estática + Perdas
+    // 5. Altura Manométrica Total (AMT):
+    // É a força total que a bomba precisa exercer (Altura + Resistência dos canos).
     const totalHead = staticHead + frictionLoss;
 
-    // 5. Vazão Real (Estimativa de perda de eficiência de 10% na bomba)
+    // 6. Vazão Real:
+    // Considera uma perda de eficiência de 10% na bomba (0.9).
     const realFlowRate = c.flowRate * 0.9;
 
-    // 6. Volume Diário (Vazão Real x Horas de Sol)
-    // Multiplica por 1000 para converter m³ para Litros
+    // 7. Volume Diário Estimado:
+    // Vazão Real (m³/h) * Horas de Sol * 1000 (para converter para Litros).
     const dailyVolume = realFlowRate * this.SUN_HOURS * 1000;
 
-    // Retorna o objeto completo para ser exibido na tela de resultados
+    // Retorna o objeto pronto para ser exibido na tela de resultados
     return {
       pumpType:
         c.pumpType === 'submerged' ? 'Bomba Submersa' : 'Bomba de Superfície',
-      distance: pipingLength, // Retorna o valor JÁ COM OS 10% ADICIONADOS
+      distance: pipingLength,
       staticHead,
       totalHead,
       nominalFlow: c.flowRate * 1000,
@@ -95,7 +103,8 @@ export class CalculationService {
     };
   }
 
-  // Métodos auxiliares para os Guards (proteção de rotas) verifiquem se há dados
+  // --- MÉTODOS AUXILIARES PARA GUARDS ---
+  // Usados pelo roteador para saber se pode deixar o usuário entrar na página
   hasGeoData(): boolean {
     return !!this.geoData;
   }

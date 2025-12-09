@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { CalculationService } from '../services/calculation.service';
 import { CommonModule, DecimalPipe } from '@angular/common';
+import { LucideAngularModule, Activity, Sun, CircleAlert, MapPinPlus, Settings } from 'lucide-angular';
 
 @Component({
   selector: 'app-result',
-  imports: [MatIconModule, CommonModule],
-  providers: [DecimalPipe], // Necessário para usar o pipe number no HTML
+  imports: [CommonModule, LucideAngularModule],
+  providers: [DecimalPipe], // Permite usar o pipe {{ value | number }}
   templateUrl: './result.component.html',
   styleUrl: './result.component.css',
 })
 export class ResultComponent implements OnInit {
+  readonly Activity = Activity;
+  readonly Sun = Sun;
+  readonly CircleAlert = CircleAlert;
+  readonly MapPinPlus  = MapPinPlus ;
+  readonly Settings = Settings;
+
   results: any = null;
 
   constructor(
@@ -20,17 +26,23 @@ export class ResultComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Chama o método principal que cruza os dados do Mapa + Config e gera o relatório
-    // O resultado já virá com a distância aumentada em 10%
+    // Ao carregar, pede ao serviço para cruzar os dados (Mapa + Config) e calcular
     this.results = this.calcService.calculateResults();
   }
 
-  // Botão "Novo Mapa" - Volta tudo pro início
+  // Botão "Novo Mapa" - Reseta a aplicação
   goBackToMap() {
+    // 1. Apaga os dados geográficos do serviço (forçando null)
+    this.calcService.setGeoData(null as any);
+    
+    // 2. Apaga as configurações do serviço
+    this.calcService.setConfigData(null as any);
+
+    // 3. Volta para a home. Como o serviço está limpo, o MapViewer carregará zerado.
     this.router.navigate(['/']);
   }
 
-  // Botão "Reconfigurar" - Volta só para a tela anterior
+  // Botão "Reconfigurar" - Apenas volta, mantendo os dados
   reconfigure() {
     this.router.navigate(['/config']);
   }

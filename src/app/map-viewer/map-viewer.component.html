@@ -1,7 +1,7 @@
 <section>
   <div class="section-header">
     <div class="section-header-icon">
-      <mat-icon>wb_sunny</mat-icon>
+      <lucide-icon [img]="Sun" class="my-icon"></lucide-icon>
     </div>
     <div class="section-header-info">
       <h2>Sistema de dimensionamento de bombeamento solar</h2>
@@ -10,9 +10,9 @@
   <div class="section-info">
     <div class="section-info-title">
       <div class="section-info-icon">
-        <mat-icon class="icon-location">location_on</mat-icon>
+        <lucide-icon [img]="MapPin" class="my-icon"></lucide-icon>
       </div>
-      <h3>Clique no mapa para selecionar o ponto de origem (fonte de água)</h3>
+      <h3>Clique no mapa para selecionar os pontos de origem e destino</h3>
     </div>
 
     <div class="section-info-text">
@@ -37,10 +37,11 @@
   <div class="section-main" id="map"></div>
   <div class="section-footer">
     <button (click)="clearMap()" class="section-footer-btn-clean">
+      <lucide-icon [img]="BrushCleaning" class="my-icon"></lucide-icon>
       Limpar Pontos
     </button>
     <button (click)="confirm()" class="section-footer-btn-confirm">
-      <mat-icon class="icon-near-me"> near_me</mat-icon>
+      <lucide-icon [img]="Navigation" class="my-icon"></lucide-icon>
       Confirmar Pontos
     </button>
   </div>

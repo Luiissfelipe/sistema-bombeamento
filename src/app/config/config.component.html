@@ -1,4 +1,13 @@
 <section>
+  <div class="section-header">   
+        <div class="section-header-icon">
+            <lucide-icon [img]="Settings" class="my-icon"></lucide-icon>
+        </div> 
+        <div class="section-header-info">
+            <h2>Configurações do Sistema</h2>
+            <p>Defina os parâmetros para o dimensionamento da bomba</p>
+        </div>
+    </div>
   <div class="section-info">
     <div class="section-info-text" *ngIf="geoData">
       <p>
@@ -58,10 +67,11 @@
     </form>
     <div class="section-main-form-buttons">
       <button class="section-main-btn-clean" (click)="goBack()">
+        <lucide-icon [img]="CircleArrowLeft" class="my-icon"></lucide-icon>
         Voltar ao Mapa
       </button>
       <button class="section-main-btn-confirm" (click)="submitConfig()">
-        <mat-icon class="icon-near-me"> near_me</mat-icon>
+        <lucide-icon [img]="Calculator" class="my-icon"></lucide-icon>
         Calcular Dimensionamento
       </button>
     </div>

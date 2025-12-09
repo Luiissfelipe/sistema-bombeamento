@@ -1,8 +1,17 @@
 <section *ngIf="results">
+  <div class="section-header">   
+        <div class="section-header-icon">
+            <lucide-icon [img]="Activity" class="my-icon"></lucide-icon>
+        </div> 
+        <div class="section-header-info">
+            <h2>Resultados do Dimensionamento</h2>
+            <p>Análise técnica e cálculos hidráulicos</p>
+        </div>
+    </div>
   <div class="section-info">
     <div class="section-info-title">
       <div class="section-info-icon">
-        <mat-icon class="icon-location"> location_on</mat-icon>
+        <lucide-icon [img]="Sun" class="my-icon"></lucide-icon>
       </div>
       <h3>Recomendação de Insolação</h3>
     </div>
@@ -59,7 +68,7 @@
     </div>
     <div class="section-main-note">
       <div class="section-note-icon">
-        <mat-icon class="icon-location"> location_on</mat-icon>
+        <lucide-icon [img]="CircleAlert" class="my-icon"></lucide-icon>
       </div>
       <p>
         <b>Observação Técnica:</b> O sistema considera automaticamente
@@ -69,10 +78,11 @@
     </div>
     <div class="section-main-buttons">
       <button class="section-main-btn-clean" (click)="goBackToMap()">
+        <lucide-icon [img]="MapPinPlus" class="my-icon"></lucide-icon>
         Novo Mapa
       </button>
       <button class="section-main-btn-confirm" (click)="reconfigure()">
-        <mat-icon>settings</mat-icon>
+        <lucide-icon [img]="Settings" class="my-icon"></lucide-icon>
         Reconfigurar
       </button>
     </div>

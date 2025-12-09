@@ -1,140 +1,168 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    /* Centraliza verticalmente */
-    justify-content: center; 
-    min-height: 0;
-    overflow: hidden; /* Garante que o componente não estoure a tela do app */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
 }
 
 section {
-    box-shadow: 0 1px 3px 0 gray, 0 1px 2px -1px gray;
-    border-radius: 15px;
-    
-    /* Margem padrão */
-    margin: 24px 16px;
-    
-    /* CORREÇÃO: Limita a altura do cartão para caber na tela, descontando as margens */
-    max-height: calc(100% - 48px); 
-    
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: white; /* Garante fundo branco se sobrepor algo */
+  display: flex;
+  flex-direction: column;
+  margin: 24px 16px;
+  max-height: calc(100% - 48px);
+  border-radius: 15px;
+  box-shadow: 0 1px 3px 0 gray, 0 1px 2px -1px gray;
+  overflow: hidden;
 }
 
 .section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--primary);
-    color: white;
-    padding: 16px;
-    flex-shrink: 0; /* Cabeçalho nunca encolhe */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background-color: var(--primary);
+  color: white;
+  flex-shrink: 0;
 }
 
 .section-header-info {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.section-header-info h2, h3 { font-size: 18px; }
-.section-header-info p { font-size: 16px; }
+.section-header-info h2,
+h3 {
+  font-size: 18px;
+}
+
+.section-header-info p {
+  font-size: 16px;
+}
 
 .section-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 16px;
-    padding: 16px 12px;
-    border: solid 1px var(--primary);
-    border-radius: 15px;
-    flex-shrink: 0; /* Info não encolhe, se possível */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px;
+  padding: 16px 12px;
+  border: solid 1px var(--primary);
+  border-radius: 15px;
+  flex-shrink: 0;
 }
 
-.section-info-title { display: flex; align-items: center; gap: 5px; }
-.icon-location { color: var(--primary); }
-.section-info-text { margin-left: 10px; font-size: 14px; text-align: justify; }
-.section-info-text b { font-weight: 900; }
+.section-info-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon-location {
+  color: var(--primary);
+}
+
+.section-info-text {
+  margin-left: 10px;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.section-info-text b {
+  font-weight: 900;
+}
 
 .section-main {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 12px 0;
-    margin: 0 16px 16px 16px; /* Ajuste na margem superior */
-    border-radius: 15px;
-    
-    /* CORREÇÃO: Ocupa o espaço restante e permite rolar se for muito grande */
-    flex: 1;
-    overflow-y: auto; 
-    min-height: 0; /* Necessário para o scroll funcionar corretamente no Flexbox */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  margin: 0 16px;
+  padding: 12px 0;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .section-main-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.section-main-info-item { display: flex; flex-direction: column; gap: 5px; }
-.section-main-info-item p { font-size: 14px; }
+.section-main-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.section-main-info-item p {
+  font-size: 14px;
+}
 
 .section-main-note {
-    display: flex;
-    gap: 10px;
-    padding: 16px 12px;
-    border: solid 1px var(--primary);
-    border-radius: 15px;
-    flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  padding: 16px 12px;
+  border: solid 1px var(--primary);
+  border-radius: 15px;
+  flex-shrink: 0;
 }
 
-.section-main-note p { font-size: 14px; text-align: justify; }
+.section-main-note p {
+  font-size: 14px;
+  text-align: justify;
+}
 
 .section-main-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    /* Garante um espaço no final da rolagem */
-    padding-bottom: 10px; 
-    flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+  flex-shrink: 0;
 }
 
 button {
-    font-size: 16px;
-    font-weight: 600;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: var(--font-regular);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
-button:hover { opacity: 0.8; transition: 0.5s; }
+button:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+}
 
-.section-main-btn-clean { background-color: lightgray; }
+.section-main-btn-clean {
+  background-color: lightgray;
+  color: var(--primary);
+  border: solid 1px var(--primary);
+}
 
 .section-main-btn-confirm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    background-color: var(--primary);
-    color: white;
+  background-color: var(--primary);
+  color: white;
 }
 
 @media screen and (min-width: 1280px) {
-    section {
-        margin: 24px 15vw;
-        width: auto;
-    }
+  section {
+    margin: 24px 15vw;
+    width: auto;
+  }
 
-    .section-main-buttons {
-        flex-direction: row;
-    }
+  .section-main-buttons {
+    flex-direction: row;
+  }
 
-    .section-main-buttons button {
-        width: 100%;
-    }
+  .section-main-buttons button {
+    width: 100%;
+  }
 }
